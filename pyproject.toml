@@ -7,11 +7,11 @@ authors = [
     { name = "mohanroda12", email = "mohanroda12@gmail.com" }
 ]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "fastapi>=0.141.1",
+    "python-dotenv>=1.2.3",
+    "uvicorn[standard]>=0.52.3",
+]
 
-[project.scripts]
-music-analysis-project = "music_analysis_project:main"
-
-[build-system]
-requires = ["uv_build>=0.12.5,<0.13.0"]
-build-backend = "uv_build"
+[tool.uv]
+package = false
