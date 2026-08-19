@@ -15,12 +15,13 @@ def get_music_service() -> MusicService:
 def get_songs():
     return {"songs": "All songs list"}
 
+@router.get("/search")
+def search_song(artist: str, title: str, service: MusicService = Depends(get_music_service)):
+    songs = service.song_search(title, artist)
+    return {"songs": songs}
+
 @router.get("/{id}")
 def get_song(id: int, service: MusicService = Depends(get_music_service)):
-    print("Test")
     song = service.get_by_id(id)
     return song
 
-@router.get("/search/{search_term}")
-def search_song(search_term: str):
-    return {"search_term": search_term}
