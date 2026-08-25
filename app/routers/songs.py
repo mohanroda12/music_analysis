@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.services.music_service import MusicService
+from typing import Optional
+from app.services.soundcharts import search_song as external_song_search
 
 router = APIRouter(
     prefix="/songs",
@@ -10,14 +12,17 @@ music_service = MusicService()
 
 def get_music_service() -> MusicService:
     return music_service
-
 @router.get("/")
-def get_songs():
-    return {"songs": "All songs list"}
+async def search_song(artist: Optional[str] = None,
+                title: Optional[str] = None,
+                service: MusicService = Depends(get_music_service)
+                ):
+    if artist or title:
+        #songs = service.song_search(title, artist)
+        songs = await external_song_search(title)
+    else:
+        songs = service.get_all_songs()
 
-@router.get("/search")
-def search_song(artist: str, title: str, service: MusicService = Depends(get_music_service)):
-    songs = service.song_search(title, artist)
     return {"songs": songs}
 
 @router.get("/{id}")
