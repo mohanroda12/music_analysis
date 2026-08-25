@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
 from app.services.music_service import MusicService
 from typing import Optional
-from app.services.soundcharts import search_song as external_song_search
+# from app.services.soundcharts import search_song as external_song_search
+from app.services.deezer import search_song as external_song_search
 
 router = APIRouter(
     prefix="/songs",

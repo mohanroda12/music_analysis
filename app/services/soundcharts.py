@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 import httpx
 
+# This API will strictly be used to get song metadata
+
 load_dotenv()
 
 CLIENT_ID = os.getenv("SOUNDCHARTS_CLIENT_ID")
@@ -9,8 +11,8 @@ CLIENT_SECRET = os.getenv("SOUNDCHARTS_CLIENT_SECRET")
 BASE_URL = os.getenv("SOUNDCHARTS_BASE_URL")
 
 async def get_access_token():
-    async with httpx.AsyncClient() as client:
 
+    async with httpx.AsyncClient() as client:
         # Send POST request to get client access token
         response = await client.post(
             "https://account.soundcharts.com/oauth/token",
@@ -19,10 +21,8 @@ async def get_access_token():
                 "grant_type": "client_credentials"
             }
         )
-
         # Check if response is successful
         response.raise_for_status()
-
         # Return only the access token as JSON
         return response.json()["access_token"]
 
