@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 class Song(BaseModel):
-    id: int
+    isrc: str
     title: str
     artist: str
     album: str
-    genre: str
+    album_cover_url: str
 
     def __hash__(self):
-        return hash(self.id)
+        return hash(self.isrc)
 
 
