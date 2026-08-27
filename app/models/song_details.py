@@ -3,7 +3,7 @@ from app.models.audio_stats import AudioStats
 from app.models.song import Song
 
 class SongDetails(BaseModel):
-    song: Song
+    song: Song | None
     uuid: str
     duration: int
     genres: dict | None

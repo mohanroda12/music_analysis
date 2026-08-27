@@ -14,7 +14,8 @@ async def search_song(search_term: str | None) -> list[Song]:
         response = await client.get(
             f"{BASE_URL}/search",
             params={
-                "q": search_term
+                "q": search_term,
+                "limit": 8
             }
         )
         response.raise_for_status()
